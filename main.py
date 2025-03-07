@@ -102,11 +102,52 @@ def get_biggest_salary():
     print("Funcionário com o maior salário:")
     print(biggest_salary)
 
-"""
+
+#TP 2.10
+def get_on_going_projects():
+    with open("projetos.csv", "r", newline='') as csv_file:
+        reader = csv.reader(csv_file, delimiter=";")
+        header = next(reader)
+
+        print("Projetos 'Em elaboração':")
+        for row in reader:
+            if row[2] == "Em elaboração":
+                print(row) 
+
+
+#TP 2.11
+def create_and_read_csv():
+    data = [
+        ["id", "quantidade", "preço"],
+        [1, 10, 15.50],
+        [2, 5, 8.75],
+        [3, 20, 22.30],
+    ]
+
+    with open("produtos.csv", "w", newline="", encoding="utf-8") as csv_file:
+        writer = csv.writer(csv_file, delimiter="|")
+        writer.writerows(data)
+
+    with open("produtos.csv", "r", newline="", encoding="utf-8") as csv_file:
+        reader = csv.reader(csv_file, delimiter="|")
+        for row in reader:
+            print(" | ".join(row))
+
+
+#TP 2.12
+def save_dataframe_to_csv():
+    data = {
+        "id": [1, 2, 3],
+        "produto": ["Celular", "Notebook", "Fone"],
+        "preço": [1500.99, 3200.50, 199.99]
+    }
+    df = pd.DataFrame(data)
+
+    df.to_csv("produtos_pandas.csv", sep=";", index=False, encoding="utf-8")
+
+
 write_csv_archive()
 read_csv_archive()
-"""
-
 dict_cast = cast_csv_to_dict()
 print(dict_cast)
 person_age_from_sp = get_sao_paulo_person_age()
@@ -116,3 +157,6 @@ create_and_read_orders()
 count_orders_rows()
 create_dataframe_from_csv()
 get_biggest_salary()
+get_on_going_projects()
+create_and_read_csv()
+save_dataframe_to_csv()
